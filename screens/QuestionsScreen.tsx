@@ -1,12 +1,42 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { Button, Switch, Text, TextInput, View } from 'react-native';
 
-const QuestionsScreen = () => {
+export default function QuestionsScreen() {
+  const [birthDate, setBirthDate] = useState('');
+  const [country, setCountry] = useState('');
+  const [smoker, setSmoker] = useState(false);
+  const [exercise, setExercise] = useState(false);
+  const router = useRouter();
+
   return (
     <View>
-      <Text>QuestionsScreen</Text>
-    </View>
-  )
-}
+      <Text>Birth Date (YYYY-MM-DD):</Text>
+      <TextInput value={birthDate} onChangeText={setBirthDate} />
 
-export default QuestionsScreen
+      <Text>Country:</Text>
+      <TextInput value={country} onChangeText={setCountry} />
+
+      <Text>Do you smoke?</Text>
+      <Switch value={smoker} onValueChange={setSmoker} />
+
+      <Text>Do you exercise?</Text>
+      <Switch value={exercise} onValueChange={setExercise} />
+
+      <Button
+        title="Calculate"
+        onPress={() => {
+          router.push({
+            pathname: '/countdown',
+            params: {
+              birthDate,
+              country,
+              smoker: smoker.toString(),
+              exercise: exercise.toString(),
+            },
+          });
+        }}
+      />
+    </View>
+  );
+}

@@ -1,13 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import QuestionsScreen from "@/screens/QuestionsScreen";
+import { StyleSheet } from "react-native";
 
 
 export default function Index() {
   return (
-    <View
-      style={styles.container}
-    >
-      <Text style={styles.text}>Test text</Text>
-    </View>
+   <>
+    <QuestionsScreen/>
+   </>
   );
 }
 
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: "#555",
+    color: "#27F53C",
   },
 
 });
