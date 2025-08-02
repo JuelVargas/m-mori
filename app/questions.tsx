@@ -7,7 +7,11 @@ export default function QuestionsScreen() {
   const [birthDate, setBirthDate] = useState("");
   const [country, setCountry] = useState("");
   const [smoker, setSmoker] = useState(false);
+  const [alcohol, setAlcohol] = useState(false);
   const [exercise, setExercise] = useState(false);
+  const [diet, setDiet] = useState(false);
+  const [sleep, setSleep] = useState(false);
+
   const router = useRouter();
 
   return (
@@ -21,8 +25,17 @@ export default function QuestionsScreen() {
       <Text>Do you smoke?</Text>
       <Switch value={smoker} onValueChange={setSmoker} />
 
-      <Text>Do you exercise?</Text>
+      <Text>Do you drink alcohol?</Text>
+      <Switch value={alcohol} onValueChange={setAlcohol} />
+
+      <Text>Do you exercise regularly?</Text>
       <Switch value={exercise} onValueChange={setExercise} />
+
+      <Text>Do you follow a healthy diet?</Text>
+      <Switch value={diet} onValueChange={setDiet} />
+
+      <Text>Do you sleep well?</Text>
+      <Switch value={sleep} onValueChange={setSleep} />
 
       <Button
         title="Calculate"
@@ -30,14 +43,16 @@ export default function QuestionsScreen() {
           const userData = {
             birthDate,
             country,
-            smoker: smoker.toString(),
-            exercise: exercise.toString(),
+            smoker,
+            alcohol,
+            exercise,
+            diet,
+            sleep,
           };
 
           await AsyncStorage.setItem("userData", JSON.stringify(userData));
 
           router.replace("/countdown");
-
         }}
       />
     </View>

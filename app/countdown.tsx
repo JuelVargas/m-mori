@@ -21,11 +21,17 @@ export default function CountdownScreen() {
     const birthDate = new Date(params.birthDate as string);
     const country = params.country as string;
     const smoker = params.smoker === 'true';
+    const alcohol = params.alcohol === 'true';
     const exercise = params.exercise === 'true';
+    const diet = params.diet === 'true';
+    const sleep = params.sleep === 'true';
 
     const seconds = calculateLifeExpectancy(birthDate, country, {
       smoker,
+      alcohol,
       exercise,
+      diet,
+      sleep
     });
 
     setSecondsLeft(seconds);
