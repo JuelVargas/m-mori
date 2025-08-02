@@ -1,10 +1,11 @@
-import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { Button, Switch, Text, TextInput, View } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import { Button, Switch, Text, TextInput, View } from "react-native";
 
 export default function QuestionsScreen() {
-  const [birthDate, setBirthDate] = useState('');
-  const [country, setCountry] = useState('');
+  const [birthDate, setBirthDate] = useState("");
+  const [country, setCountry] = useState("");
   const [smoker, setSmoker] = useState(false);
   const [exercise, setExercise] = useState(false);
   const router = useRouter();
@@ -25,16 +26,18 @@ export default function QuestionsScreen() {
 
       <Button
         title="Calculate"
-        onPress={() => {
-          router.push({
-            pathname: '/countdown',
-            params: {
-              birthDate,
-              country,
-              smoker: smoker.toString(),
-              exercise: exercise.toString(),
-            },
-          });
+        onPress={async () => {
+          const userData = {
+            birthDate,
+            country,
+            smoker: smoker.toString(),
+            exercise: exercise.toString(),
+          };
+
+          await AsyncStorage.setItem("userData", JSON.stringify(userData));
+
+          router.replace("/countdown");
+
         }}
       />
     </View>

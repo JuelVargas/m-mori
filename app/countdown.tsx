@@ -1,13 +1,23 @@
-import { useLocalSearchParams } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { calculateLifeExpectancy } from '../utils/lifeExpectancyCalculator';
 
 export default function CountdownScreen() {
-  const params = useLocalSearchParams();
+  const [params, setParams] = useState<any>(null);
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const dataFromLocalStorage = await AsyncStorage.getItem('userData');
+      setParams(dataFromLocalStorage ? JSON.parse(dataFromLocalStorage) : {});
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!params) return;
+
     const birthDate = new Date(params.birthDate as string);
     const country = params.country as string;
     const smoker = params.smoker === 'true';
@@ -25,7 +35,7 @@ export default function CountdownScreen() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [params]);
 
   return (
     <View>
