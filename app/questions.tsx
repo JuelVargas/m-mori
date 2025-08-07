@@ -1,3 +1,4 @@
+import useOrientation from "@/hooks/useOrientation";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -11,8 +12,11 @@ export default function QuestionsScreen() {
   const [exercise, setExercise] = useState(false);
   const [diet, setDiet] = useState(false);
   const [sleep, setSleep] = useState(false);
+  const orientation = useOrientation()
 
   const router = useRouter();
+
+  console.warn("Current orientation:", orientation);
 
   return (
     <View>
