@@ -14,9 +14,6 @@ export default function Index() {
 
       if (storedData) {
         router.replace('/countdown');
-        setTimeout(() => { // if data exists, navigate to questions after 5 seconds
-          router.replace('/questions');//remember to delete this line after testing
-        }, 5000);
       } else {
         router.replace('/questions');
       }

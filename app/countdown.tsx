@@ -47,8 +47,9 @@ export default function CountdownScreen() {
 
   return (
     <View style={orientation === 'LANDSCAPE' ? styles.landscape : styles.portrait}>
-      <Text>Estimated time left (in seconds):</Text>
-      <Text style={{ fontSize: 32 }}>{secondsLeft}</Text>
+      <Text style={styles.text}>Time Left:</Text>
+      <Text style={[styles.seconds, orientation == 'LANDSCAPE' ? styles.secondsx: styles.secondsy]}>{secondsLeft}</Text>
+      <Text style={styles.text}>seconds</Text>
     </View>
   );
 
@@ -60,13 +61,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#100a09'
   },
   landscape: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0'
+    backgroundColor: '#100a09'
+  },
+  text: {
+    color: '#efebeb',
+    fontSize: 12,
+  },
+  seconds : {
+    color: '#d49e94',
+    fontWeight: 'bold',
+  },
+  secondsx : {
+    fontSize: 90,
+  },
+  secondsy : {
+    fontSize: 50,
   }
 });

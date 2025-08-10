@@ -25,7 +25,7 @@ export default function QuestionsScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={orientation === "PORTRAIT" ? styles.container : styles.containerY}>
       <Text style={styles.title}>Health & Lifestyle Questionnaire</Text>
 
       <Text style={styles.label}>Birth Date (YYYY-MM-DD):</Text>
@@ -130,6 +130,13 @@ export default function QuestionsScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 24,
+    backgroundColor: "#100a09",
+    flexGrow: 1,
+    justifyContent: "center",
+  },
+  containerY: {
+    padding: 24,
+    paddingHorizontal: 120,
     backgroundColor: "#100a09",
     flexGrow: 1,
     justifyContent: "center",
